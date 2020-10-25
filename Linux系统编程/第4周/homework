@@ -938,6 +938,29 @@ book unit1 1-6 查看你的系统的头文件limits.h。系统相关的静态限
 	
 	
 	unit2 2-7 编写程序说明gets()函数的危险性。
+	#include <stdio.h>
+        #include <string.h>
+	#include <stdlib.h>
+	#define BUF_SIZE 8
+
+	int main(void)
+	{
+	   FILE *fd;
+ 	  int fgets_yes;
+ 	  struct iobuf {
+    	  char buf[BUF_SIZE];
+   	  char others[BUF_SIZE];
+   	}buffer;
+  
+  	 memset(&buffer,'\0',sizeof(struct iobuf)); 
+        fprintf(stdout,"please enter a line\n");
+        gets(buffer.buf);
+        fprintf(stdout,"gets() get string \"%s\"\n",buffer.buf);
+       /* 查看溢出情况 */
+       fprintf(stdout,"buffer.others is \"%s\"\n",buffer.others);
+  	 exit(0);
+	}
+        定义一个结构体类型，将两个数组结合在一起，当输入字符超过buf的大小时，gets()会导致数据溢出到成员others中。
   
   
 	2-10 设某个文件含n个记录，文件的第一个字(4字节）给出记录的总个数n，随后的n个字给出各个记录的长度（字节数)，剩余部分则由各个记录组成。

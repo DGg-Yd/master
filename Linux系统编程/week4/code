@@ -1,0 +1,853 @@
+yd@ubuntu:~$ pwd
+/home/yd
+yd@ubuntu:~$ ls
+dbs Documents dump.rdb Music practice Templates week3
+Desktop Downloads examples.desktop Pictures Public Videos workspace
+yd@ubuntu:~$ ls -a
+. .gnome2 Public
+.. .gnome2_private .PyCharm2016.3
+.bash_history .gnupg .yd_history
+.bash_logout .ICEauthority .ssh
+.bashrc .idea .stardict
+.cache .iyd .sudo_as_admin_successful
+.codeintel .java .sunpinyin
+.config .local Templates
+dbs .mongorc.js Videos
+.dbshell .mozilla .vim
+.dbus Music .viminfo
+Desktop .mysql_history .vimrc
+.dmrc .nano .virtualenvs
+Documents .node_repl_history week3
+Downloads .pam_environment .wget-hsts
+dump.rdb Pictures workspace
+examples.desktop .pki .Xauthority
+.gconf practice .xinputrc
+.git .presage .xsession-errors
+.gitconfig .profile .xsession-errors.old
+.gnome .psql_history
+yd@ubuntu:~$ mkdir week4
+yd@ubuntu:~$ cd week4
+yd@ubuntu:~/week4$ vi 4-1-1
+yd@ubuntu:~/week4$ gcc -g -Wall 4-1-1.c -o 4-1-1
+gcc: error: 4-1-1.c: 没有那个文件或目录
+gcc: fatal error: no input files
+compilation terminated.
+yd@ubuntu:~/week4$ cat 4-1-1.c
+cat: 4-1-1.c: 没有那个文件或目录
+yd@ubuntu:~/week4$ cat 4.1.1
+cat: 4.1.1: 没有那个文件或目录
+yd@ubuntu:~/week4$ cat 4-1-1
+#include "ch02.h"
+int main(int argc, char **argv)
+{
+int n,from,to;
+char buf[1024];
+if(argc !=3)
+{
+printf("Usage : %s from-file to-file\n",argv[0]);
+exit(1);
+}
+if((from = open (argv[1],O_RDONLY))<0)
+err_exit(argv[1]);
+if((to = open(argv[2], O_WRONLY|O_CREAT|O_APPEND,0644))<0)
+err_exit(argv[2]);
+while((n = read(from, buf,sizeof(buf)))>0)
+write(to,buf,n);
+close(from);
+close(to);
+}
+yd@ubuntu:~/week4$ cp 4-1-1 4-1-1.c
+yd@ubuntu:~/week4$ cat 4-1-1.c
+#include "ch02.h"
+int main(int argc, char **argv)
+{
+int n,from,to;
+char buf[1024];
+if(argc !=3)
+{
+printf("Usage : %s from-file to-file\n",argv[0]);
+exit(1);
+}
+if((from = open (argv[1],O_RDONLY))<0)
+err_exit(argv[1]);
+if((to = open(argv[2], O_WRONLY|O_CREAT|O_APPEND,0644))<0)
+err_exit(argv[2]);
+while((n = read(from, buf,sizeof(buf)))>0)
+write(to,buf,n);
+close(from);
+close(to);
+}
+yd@ubuntu:~/week4$ rm 4-1-1
+yd@ubuntu:~/week4$ gcc -g -Wall 4-1-1.c -o 4-1-1
+4-1-1.c: In function ‘main’:
+4-1-1.c:9:9: warning: implicit declaration of function ‘exit’ [-Wimplicit-function-declaration]
+exit(1);
+^
+4-1-1.c:9:9: warning: incompatible implicit declaration of built-in function ‘exit’
+4-1-1.c:9:9: note: include ‘<stdlib.h>’ or provide a declaration of ‘exit’
+4-1-1.c:12:9: warning: implicit declaration of function ‘err_exit’ [-Wimplicit-function-declaration]
+err_exit(argv[1]);
+^
+/tmp/cc8OM8pg.o：在函数‘main’中：
+/home/yd/week4/4-1-1.c:12：对‘err_exit’未定义的引用
+/home/yd/week4/4-1-1.c:14：对‘err_exit’未定义的引用
+collect2: error: ld returned 1 exit status
+yd@ubuntu:~/week4$ vi 4-1-1.c
+yd@ubuntu:~/week4$ gcc -g -Wall 4-1-1.c -o 4-1-1
+4-1-1.c: In function ‘main’:
+4-1-1.c:9:9: warning: implicit declaration of function ‘exit’ [-Wimplicit-function-declaration]
+exit(1);
+^
+4-1-1.c:9:9: warning: incompatible implicit declaration of built-in function ‘exit’
+4-1-1.c:9:9: note: include ‘<stdlib.h>’ or provide a declaration of ‘exit’
+4-1-1.c:12:9: warning: incompatible implicit declaration of built-in function ‘exit’
+exit(argv[1]);
+^
+4-1-1.c:12:9: note: include ‘<stdlib.h>’ or provide a declaration of ‘exit’
+4-1-1.c:12:14: warning: passing argument 1 of ‘exit’ makes integer from pointer without a cast [-Wint-conversion]
+exit(argv[1]);
+^
+4-1-1.c:12:14: note: expected ‘int’ but argument is of type ‘char *’
+4-1-1.c:14:9: warning: incompatible implicit declaration of built-in function ‘exit’
+exit(argv[2]);
+^
+4-1-1.c:14:9: note: include ‘<stdlib.h>’ or provide a declaration of ‘exit’
+4-1-1.c:14:14: warning: passing argument 1 of ‘exit’ makes integer from pointer without a cast [-Wint-conversion]
+exit(argv[2]);
+^
+4-1-1.c:14:14: note: expected ‘int’ but argument is of type ‘char *’
+yd@ubuntu:~/week4$ vi 4-1-1.c
+yd@ubuntu:~/week4$ gcc -g -Wall 4-1-1.c -o 4-1-1
+4-1-1.c: In function ‘main’:
+4-1-1.c:9:9: warning: implicit declaration of function ‘exit’ [-Wimplicit-function-declaration]
+exit(1);
+^
+4-1-1.c:9:9: warning: incompatible implicit declaration of built-in function ‘exit’
+4-1-1.c:9:9: note: include ‘<stdlib.h>’ or provide a declaration of ‘exit’
+4-1-1.c:12:9: warning: incompatible implicit declaration of built-in function ‘exit’
+exit(1);
+^
+4-1-1.c:12:9: note: include ‘<stdlib.h>’ or provide a declaration of ‘exit’
+4-1-1.c:14:9: warning: incompatible implicit declaration of built-in function ‘exit’
+exit(1);
+^
+4-1-1.c:14:9: note: include ‘<stdlib.h>’ or provide a declaration of ‘exit’
+yd@ubuntu:~/week4$ vi ch02.h
+yd@ubuntu:~/week4$ gcc -g -Wall 4-1-1.c -o 4-1-1
+yd@ubuntu:~/week4$ ./4-1-1
+Usage : ./4-1-1 from-file to-file
+yd@ubuntu:~/week4$ cat 4-1-1.c
+#include "ch02.h"
+int main(int argc, char **argv)
+{
+int n,from,to;
+char buf[1024];
+if(argc !=3)
+{
+printf("Usage : %s from-file to-file\n",argv[0]);
+exit(1);
+}
+if((from = open (argv[1],O_RDONLY))<0)
+exit(1);
+if((to = open(argv[2], O_WRONLY|O_CREAT|O_APPEND,0644))<0)
+exit(1);
+while((n = read(from, buf,sizeof(buf)))>0)
+write(to,buf,n);
+close(from);
+close(to);
+return 0;
+}
+yd@ubuntu:~/week4$ ./4-1-1
+Usage : ./4-1-1 from-file to-file
+yd@ubuntu:~/week4$ ./4-1-1 1 2 3 
+Usage : ./4-1-1 from-file to-file
+yd@ubuntu:~/week4$ vi 4-1-1.c
+yd@ubuntu:~/week4$ gcc -g -Wall 4-1-1.c -o 4-1-1
+yd@ubuntu:~/week4$ ./4-1-1 1 2 3 
+Usage : ./4-1-1 from-file to-file
+yd@ubuntu:~/week4$ ./4-1-1 123456 123 123
+Usage : ./4-1-1 from-file to-file
+yd@ubuntu:~/week4$ cat 4-1-1.c
+#include "ch02.h"
+int main(int argc, char **argv)
+{
+int n,from,to;
+char buf[1024];
+if(argc !=3)
+{
+printf("Usage : %s from-file to-file\n",argv[0]);
+exit(1);
+}
+if((from = open (argv[1],O_RDONLY))<0)
+{
+printf("Usage : %s from-file to-file\n",argv[1]);
+exit(1);
+}
+if((to = open(argv[2], O_WRONLY|O_CREAT|O_APPEND,0644))<0)
+{
+printf("Usage : %s from-file to-file\n",argv[2]);
+exit(1);
+}
+while((n = read(from, buf,sizeof(buf)))>0)
+write(to,buf,n);
+close(from);
+close(to);
+return 0;
+}
+yd@ubuntu:~/week4$ ./4-1-1 123456 123 123
+Usage : ./4-1-1 from-file to-file
+yd@ubuntu:~/week4$ ls
+4-1-1 4-1-1.c ch02.h
+yd@ubuntu:~/week4$ ./4-1-1 /proc/cpuinfo ./cpu.bak
+yd@ubuntu:~/week4$ ls
+4-1-1 4-1-1.c ch02.h cpu.bak
+yd@ubuntu:~/week4$ time ./4-1-1 /proc/cpuinfo ./cpu.bak
+
+real 0m0.001s
+user 0m0.000s
+sys 0m0.000s
+yd@ubuntu:~/week4$ ^C
+yd@ubuntu:~/week4$ vi 4-2.c
+yd@ubuntu:~/week4$ vi ch02.h
+yd@ubuntu:~/week4$ gcc -g -Wall 4-2.c -o 4-2
+4-2.c: In function ‘main’:
+4-2.c:7:5: error: stray ‘\357’ in program
+if ((fd = open("file.hole.2",O_WRONLY|O_CREAT|O_APPEND，0644))<0)
+^
+4-2.c:7:5: error: stray ‘\274’ in program
+4-2.c:7:5: error: stray ‘\214’ in program
+4-2.c:7:62: error: expected ‘)’ before numeric constant
+if ((fd = open("file.hole.2",O_WRONLY|O_CREAT|O_APPEND，0644))<0)
+^
+4-2.c:9:18: error: ‘bufl’ undeclared (first use in this function)
+if(write (fd,bufl,10)!= 10)
+^
+4-2.c:9:18: note: each undeclared identifier is reported only once for each function it appears in
+4-2.c:11:5: error: stray ‘\357’ in program
+if(lseek (fd，40，SEEK_SET)== -1)
+^
+4-2.c:11:5: error: stray ‘\274’ in program
+4-2.c:11:5: error: stray ‘\214’ in program
+4-2.c:11:20: error: expected ‘)’ before numeric constant
+if(lseek (fd，40，SEEK_SET)== -1)
+^
+4-2.c:11:20: error: stray ‘\357’ in program
+4-2.c:11:20: error: stray ‘\274’ in program
+4-2.c:11:20: error: stray ‘\214’ in program
+4-2.c:11:8: error: too few arguments to function ‘lseek’
+if(lseek (fd，40，SEEK_SET)== -1)
+^
+In file included from ch02.h:4:0,
+from 4-2.c:1:
+/usr/include/unistd.h:337:16: note: declared here
+extern __off_t lseek (int __fd, __off_t __offset, int __whence) __THROW;
+^
+4-2.c:13:5: error: stray ‘\357’ in program
+if( write (fd,buf2，10)!= 10)
+^
+4-2.c:13:5: error: stray ‘\274’ in program
+4-2.c:13:5: error: stray ‘\214’ in program
+4-2.c:13:26: error: expected ‘)’ before numeric constant
+if( write (fd,buf2，10)!= 10)
+^
+4-2.c:13:9: error: too few arguments to function ‘write’
+if( write (fd,buf2，10)!= 10)
+^
+In file included from ch02.h:4:0,
+from 4-2.c:1:
+/usr/include/unistd.h:369:16: note: declared here
+extern ssize_t write (int __fd, const void *__buf, size_t __n) __wur;
+^
+4-2.c:15:10: error: ‘O’ undeclared (first use in this function)
+exit(O);
+^
+yd@ubuntu:~/week4$ vi 4-2.c
+yd@ubuntu:~/week4$ gcc -g -Wall 4-2.c -o 4-2
+4-2.c: In function ‘main’:
+4-2.c:7:5: error: stray ‘\357’ in program
+if ((fd = open("file.hole.2",O_WRONLY|O_CREAT|O_APPEND，0644))<0)
+^
+4-2.c:7:5: error: stray ‘\274’ in program
+4-2.c:7:5: error: stray ‘\214’ in program
+4-2.c:7:62: error: expected ‘)’ before numeric constant
+if ((fd = open("file.hole.2",O_WRONLY|O_CREAT|O_APPEND，0644))<0)
+^
+4-2.c:11:5: error: stray ‘\357’ in program
+if(lseek(fd，40，SEEK_SET)== -1)
+^
+4-2.c:11:5: error: stray ‘\274’ in program
+4-2.c:11:5: error: stray ‘\214’ in program
+4-2.c:11:19: error: expected ‘)’ before numeric constant
+if(lseek(fd，40，SEEK_SET)== -1)
+^
+4-2.c:11:19: error: stray ‘\357’ in program
+4-2.c:11:19: error: stray ‘\274’ in program
+4-2.c:11:19: error: stray ‘\214’ in program
+4-2.c:11:8: error: too few arguments to function ‘lseek’
+if(lseek(fd，40，SEEK_SET)== -1)
+^
+In file included from ch02.h:4:0,
+from 4-2.c:1:
+/usr/include/unistd.h:337:16: note: declared here
+extern __off_t lseek (int __fd, __off_t __offset, int __whence) __THROW;
+^
+4-2.c:13:5: error: stray ‘\357’ in program
+if(write(fd,buf2，10)!= 10)
+^
+4-2.c:13:5: error: stray ‘\274’ in program
+4-2.c:13:5: error: stray ‘\214’ in program
+4-2.c:13:24: error: expected ‘)’ before numeric constant
+if(write(fd,buf2，10)!= 10)
+^
+4-2.c:13:8: error: too few arguments to function ‘write’
+if(write(fd,buf2，10)!= 10)
+^
+In file included from ch02.h:4:0,
+from 4-2.c:1:
+/usr/include/unistd.h:369:16: note: declared here
+extern ssize_t write (int __fd, const void *__buf, size_t __n) __wur;
+^
+4-2.c:15:10: error: ‘O’ undeclared (first use in this function)
+exit(O);
+^
+4-2.c:15:10: note: each undeclared identifier is reported only once for each function it appears in
+yd@ubuntu:~/week4$ vi 4-2.c
+yd@ubuntu:~/week4$ gcc -g -Wall 4-2.c -o 4-2
+4-2.c: In function ‘main’:
+4-2.c:7:5: error: stray ‘\357’ in program
+if((fd = open("file.hole.2",O_WRONLY|O_CREAT|O_APPEND，0644))<0)
+^
+4-2.c:7:5: error: stray ‘\274’ in program
+4-2.c:7:5: error: stray ‘\214’ in program
+4-2.c:7:61: error: expected ‘)’ before numeric constant
+if((fd = open("file.hole.2",O_WRONLY|O_CREAT|O_APPEND，0644))<0)
+^
+4-2.c:11:5: error: stray ‘\357’ in program
+if(lseek(fd，40，SEEK_SET)== -1)
+^
+4-2.c:11:5: error: stray ‘\274’ in program
+4-2.c:11:5: error: stray ‘\214’ in program
+4-2.c:11:19: error: expected ‘)’ before numeric constant
+if(lseek(fd，40，SEEK_SET)== -1)
+^
+4-2.c:11:19: error: stray ‘\357’ in program
+4-2.c:11:19: error: stray ‘\274’ in program
+4-2.c:11:19: error: stray ‘\214’ in program
+4-2.c:11:8: error: too few arguments to function ‘lseek’
+if(lseek(fd，40，SEEK_SET)== -1)
+^
+In file included from ch02.h:4:0,
+from 4-2.c:1:
+/usr/include/unistd.h:337:16: note: declared here
+extern __off_t lseek (int __fd, __off_t __offset, int __whence) __THROW;
+^
+4-2.c:13:5: error: stray ‘\357’ in program
+if(write(fd,buf2，10)!= 10)
+^
+4-2.c:13:5: error: stray ‘\274’ in program
+4-2.c:13:5: error: stray ‘\214’ in program
+4-2.c:13:24: error: expected ‘)’ before numeric constant
+if(write(fd,buf2，10)!= 10)
+^
+4-2.c:13:8: error: too few arguments to function ‘write’
+if(write(fd,buf2，10)!= 10)
+^
+In file included from ch02.h:4:0,
+from 4-2.c:1:
+/usr/include/unistd.h:369:16: note: declared here
+extern ssize_t write (int __fd, const void *__buf, size_t __n) __wur;
+^
+yd@ubuntu:~/week4$ vi 4-2.c
+yd@ubuntu:~/week4$ vi 4-2.c
+yd@ubuntu:~/week4$ gcc -g -Wall 4-2.c -o 4-2
+yd@ubuntu:~/week4$ vi ch02.h
+yd@ubuntu:~/week4$ gcc -g -Wall 4-2.c -o 4-2
+In file included from 4-2.c:1:0:
+ch02.h: In function ‘err_exit’:
+ch02.h:10:12: warning: format ‘%s’ expects a matching ‘char *’ argument [-Wformat=]
+printf("Usage : %s is faile!\n");
+^
+yd@ubuntu:~/week4$ vi ch02.h
+yd@ubuntu:~/week4$ gcc -g -Wall 4-2.c -o 4-2
+yd@ubuntu:~/week4$ cp 4-2.c 4-3.c
+yd@ubuntu:~/week4$ vi 4-3.c
+yd@ubuntu:~/week4$ gcc -g -Wall 4-3.c -o 4-3
+yd@ubuntu:~/week4$ ./4-2
+yd@ubuntu:~/week4$ a.out
+a.out：未找到命令
+yd@ubuntu:~/week4$ ls -l 
+总用量 60
+-rwxrwxr-x 1 yd yd 10184 10月 19 10:30 4-1-1
+-rw-rw-r-- 1 yd yd 595 10月 19 10:30 4-1-1.c
+-rwxrwxr-x 1 yd yd 10232 10月 19 11:02 4-2
+-rw-rw-r-- 1 yd yd 400 10月 19 11:01 4-2.c
+-rwxrwxr-x 1 yd yd 10232 10月 19 11:03 4-3
+-rw-rw-r-- 1 yd yd 411 10月 19 11:03 4-3.c
+-rw-rw-r-- 1 yd yd 221 10月 19 11:02 ch02.h
+-rw-r--r-- 1 yd yd 1830 10月 19 10:37 cpu.bak
+-rw-r--r-- 1 yd yd 50 10月 19 11:03 file.hole
+yd@ubuntu:~/week4$ od -c file.hole
+0000000 a b c d e f g h i j \0 \0 \0 \0 \0 \0
+0000020 \0 \0 \0 \0 \0 \0 \0 \0 \0 \0 \0 \0 \0 \0 \0 \0
+0000040 \0 \0 \0 \0 \0 \0 \0 \0 0 1 2 3 4 5 6 7
+0000060 8 9
+0000062
+yd@ubuntu:~/week4$ rm file.hole
+yd@ubuntu:~/week4$ ./4-2
+yd@ubuntu:~/week4$ ls -l 
+总用量 60
+-rwxrwxr-x 1 yd yd 10184 10月 19 10:30 4-1-1
+-rw-rw-r-- 1 yd yd 595 10月 19 10:30 4-1-1.c
+-rwxrwxr-x 1 yd yd 10232 10月 19 11:02 4-2
+-rw-rw-r-- 1 yd yd 400 10月 19 11:01 4-2.c
+-rwxrwxr-x 1 yd yd 10232 10月 19 11:03 4-3
+-rw-rw-r-- 1 yd yd 411 10月 19 11:03 4-3.c
+-rw-rw-r-- 1 yd yd 221 10月 19 11:02 ch02.h
+-rw-r--r-- 1 yd yd 1830 10月 19 10:37 cpu.bak
+-rw-r--r-- 1 yd yd 50 10月 19 11:05 file.hole
+yd@ubuntu:~/week4$ od -c file.hole
+0000000 a b c d e f g h i j \0 \0 \0 \0 \0 \0
+0000020 \0 \0 \0 \0 \0 \0 \0 \0 \0 \0 \0 \0 \0 \0 \0 \0
+0000040 \0 \0 \0 \0 \0 \0 \0 \0 0 1 2 3 4 5 6 7
+0000060 8 9
+0000062
+yd@ubuntu:~/week4$ ./4-3
+yd@ubuntu:~/week4$ ls -l 
+总用量 64
+-rwxrwxr-x 1 yd yd 10184 10月 19 10:30 4-1-1
+-rw-rw-r-- 1 yd yd 595 10月 19 10:30 4-1-1.c
+-rwxrwxr-x 1 yd yd 10232 10月 19 11:02 4-2
+-rw-rw-r-- 1 yd yd 400 10月 19 11:01 4-2.c
+-rwxrwxr-x 1 yd yd 10232 10月 19 11:03 4-3
+-rw-rw-r-- 1 yd yd 411 10月 19 11:03 4-3.c
+-rw-rw-r-- 1 yd yd 221 10月 19 11:02 ch02.h
+-rw-r--r-- 1 yd yd 1830 10月 19 10:37 cpu.bak
+-rw-r--r-- 1 yd yd 50 10月 19 11:05 file.hole
+-rw-r--r-- 1 yd yd 20 10月 19 11:05 file.hole.2
+yd@ubuntu:~/week4$ od -c file.hole.2
+0000000 a b c d e f g h i j 0 1 2 3 4 5
+0000020 6 7 8 9
+0000024
+yd@ubuntu:~/week4$ vi 4-4.c
+yd@ubuntu:~/week4$ gcc -g -Wall 4-4.c -o 4-4
+4-4.c: In function ‘main’:
+4-4.c:11:13: error: ‘bud’ undeclared (first use in this function)
+read(d2,bud,4);
+^
+4-4.c:11:13: note: each undeclared identifier is reported only once for each function it appears in
+yd@ubuntu:~/week4$ vi 4-4.c
+yd@ubuntu:~/week4$ gcc -g -Wall 4-4.c -o 4-4
+yd@ubuntu:~/week4$ ./4-4
+d1=3,d2=4
+buf:abcd
+yd@ubuntu:~/week4$ 
+yd@ubuntu:~/week4$ ^C
+yd@ubuntu:~/week4$ cat 4-2.c 4-3.c 4-4.c ch02.h
+#include "ch02.h"
+char buf1[]="abcdefghij";
+char buf2[]="0123456789";
+int main(void)
+{
+int fd;
+if((fd=open("file.hole",O_WRONLY|O_CREAT,0644))<0)
+err_exit("Creat error!");
+if(write(fd,buf1,10)!=10)
+err_exit("Write error!");
+if(lseek(fd,40,SEEK_SET)==-1)
+err_exit("Lseek error!");
+if(write(fd,buf2,10)!=10)
+err_exit("Write error!");
+return 0;
+}
+#include "ch02.h"
+char buf1[]="abcdefghij";
+char buf2[]="0123456789";
+int main(void)
+{
+int fd;
+if((fd=open("file.hole.2",O_WRONLY|O_CREAT|O_APPEND,0644))<0)
+err_exit("Creat error!");
+if(write(fd,buf1,10)!=10)
+err_exit("Write error!");
+if(lseek(fd,40,SEEK_SET)==-1)
+err_exit("Lseek error!");
+if(write(fd,buf2,10)!=10)
+err_exit("Write error!");
+return 0;
+}
+#include "ch02.h"
+int main()
+{
+int d1,d2;
+char buf[5];
+memset(buf,0,5);
+d1=open("file.hole",O_RDONLY);
+d2=open("file.hole",O_RDONLY);
+printf("d1=%d,d2=%d\n",d1,d2);
+lseek(d1,5,SEEK_SET);
+read(d2,buf,4);
+printf("buf:%s\n",buf);
+return 0;
+}
+#include <stdio.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <unistd.h>
+#include <string.h>
+#include <fcntl.h>
+#include <stdlib.h>
+void err_exit(char *s)
+{
+printf("Usage : *s is faile!\n");
+exit(1);
+}
+yd@ubuntu:~/week4$ 
+yd@ubuntu:~/week4$ ^C
+yd@ubuntu:~/week4$ cp 4-4.c 4-5.c
+yd@ubuntu:~/week4$ vi 4-5.c
+yd@ubuntu:~/week4$ gcc -g -Wall 4-5.c -o 4-5
+yd@ubuntu:~/week4$ ./4-5
+d1=3,d2=4
+buf:fghi
+yd@ubuntu:~/week4$ cp 4-5.c 4-6.c
+yd@ubuntu:~/week4$ vi 4-6.c
+yd@ubuntu:~/week4$ gcc 4-6.c -o 4-6
+yd@ubuntu:~/week4$ ./4-6
+Redirect stdout file!
+yd@ubuntu:~/week4$ vi 4-6.c
+yd@ubuntu:~/week4$ cat 4-5.c
+#include "ch02.h"
+int main()
+{
+int d1,d2;
+char buf[5];
+memset(buf,0,5);
+d1=open("file.hole",O_RDONLY);
+d2=dup(d1);
+printf("d1=%d,d2=%d\n",d1,d2);
+lseek(d1,5,SEEK_SET);
+read(d2,buf,4);
+printf("buf:%s\n",buf);
+return 0;
+}
+yd@ubuntu:~/week4$ vi 4-6.c
+yd@ubuntu:~/week4$ gcc 4-6.c -o 4-6
+yd@ubuntu:~/week4$ ./4-6
+yd@ubuntu:~/week4$ vi 4-6.c
+yd@ubuntu:~/week4$ vi 4-6.c
+yd@ubuntu:~/week4$ cat out.info
+Redirect stdout file!
+yd@ubuntu:~/week4$ ls -l
+总用量 116
+-rwxrwxr-x 1 yd yd 10184 10月 19 10:30 4-1-1
+-rw-rw-r-- 1 yd yd 595 10月 19 10:30 4-1-1.c
+-rwxrwxr-x 1 yd yd 10232 10月 19 11:02 4-2
+-rw-rw-r-- 1 yd yd 400 10月 19 11:01 4-2.c
+-rwxrwxr-x 1 yd yd 10232 10月 19 11:03 4-3
+-rw-rw-r-- 1 yd yd 411 10月 19 11:03 4-3.c
+-rwxrwxr-x 1 yd yd 10264 10月 19 11:10 4-4
+-rw-rw-r-- 1 yd yd 279 10月 19 11:10 4-4.c
+-rwxrwxr-x 1 yd yd 10312 10月 19 15:44 4-5
+-rw-rw-r-- 1 yd yd 260 10月 19 15:44 4-5.c
+-rwxrwxr-x 1 yd yd 8832 10月 19 16:07 4-6
+-rw-rw-r-- 1 yd yd 198 10月 19 16:10 4-6.c
+-rw-rw-r-- 1 yd yd 221 10月 19 11:02 ch02.h
+-rw-r--r-- 1 yd yd 1830 10月 19 10:37 cpu.bak
+-rw-r--r-- 1 yd yd 50 10月 19 11:05 file.hole
+-rw-r--r-- 1 yd yd 20 10月 19 11:05 file.hole.2
+-rw-r--r-- 1 yd yd 22 10月 19 16:07 out.info
+yd@ubuntu:~/week4$ ls -a
+. 4-1-1 4-2 4-3 4-4 4-5 4-6 ch02.h file.hole out.info
+.. 4-1-1.c 4-2.c 4-3.c 4-4.c 4-5.c 4-6.c cpu.bak file.hole.2
+yd@ubuntu:~/week4$ cat 4-6.c
+#include "ch02.h"
+int main()
+{
+int d1;
+d1=open("./out.info",O_CREAT|O_TRUNC|O_WRONLY,0644);
+dup2(d1,1);
+d1=dup(STDOUT_FILENO);
+printf("Redirect stdout file!\n");
+return 0;
+}
+yd@ubuntu:~/week4$ pwd
+/home/yd/week4
+yd@ubuntu:~/week4$ ls
+4-1-1 4-2 4-3 4-4 4-5 4-6 ch02.h file.hole out.info
+4-1-1.c 4-2.c 4-3.c 4-4.c 4-5.c 4-6.c cpu.bak file.hole.2
+yd@ubuntu:~/week4$ cat 4-6.c 4-7.c
+#include "ch02.h"
+int main()
+{
+int d1;
+d1=open("./out.info",O_CREAT|O_TRUNC|O_WRONLY,0644);
+dup2(d1,1);
+d1=dup(STDOUT_FILENO);
+printf("Redirect stdout file!\n");
+return 0;
+}
+cat: 4-7.c: 没有那个文件或目录
+yd@ubuntu:~/week4$ cp 4-4.c 4-7.c
+yd@ubuntu:~/week4$ vi 4-7.c
+yd@ubuntu:~/week4$ 
+yd@ubuntu:~/week4$ vi 4-7.c
+yd@ubuntu:~/week4$ vi ch02.h
+yd@ubuntu:~/week4$ vi 4-7.c
+yd@ubuntu:~/week4$ cp 4-7.c 4-8.c
+yd@ubuntu:~/week4$ vi 4-8.c
+yd@ubuntu:~/week4$ vi 4-7.c
+yd@ubuntu:~/week4$ cp 4-8.c 4-7.c
+yd@ubuntu:~/week4$ vi 4-7.c
+yd@ubuntu:~/week4$ gcc 4-7.c -o 4-7
+4-7.c: In function ‘main’:
+4-7.c:6:26: error: ‘O_CAEAT’ undeclared (first use in this function)
+fd=open("./test.dat",O_CAEAT|O_TRUNC|O_WRONLY,0644);
+^
+4-7.c:6:26: note: each undeclared identifier is reported only once for each function it appears in
+4-7.c:11:12: error: assignment to expression with array type
+buf=(char)('a'+n);
+^
+yd@ubuntu:~/week4$ vi 4-7.c
+yd@ubuntu:~/week4$ vi 4-7.c
+yd@ubuntu:~/week4$ gcc 4-7.c -o 4-7
+4-7.c: In function ‘main’:
+4-7.c:6:26: error: ‘O_CAEAT’ undeclared (first use in this function)
+fd=open("./test.dat",O_CAEAT|O_TRUNC|O_WRONLY,0644);
+^
+4-7.c:6:26: note: each undeclared identifier is reported only once for each function it appears in
+yd@ubuntu:~/week4$ vi 4-7.c
+yd@ubuntu:~/week4$ gcc 4-7.c -o 4-7
+yd@ubuntu:~/week4$ vi 4-8.c
+yd@ubuntu:~/week4$ gcc 4-8.c -o 4-8
+yd@ubuntu:~/week4$ cat 4-7.c 4-8.c
+#include "ch02.h"
+int main()
+{
+int n,i,fd;
+char buf;
+fd=open("./test.dat",O_CREAT|O_TRUNC|O_WRONLY,0644);
+for(i=0;i<2;i++)
+{
+srand(time(0));
+n=rand()%26;
+buf=(char)('a'+n);
+write(fd,&buf,1);
+lseek(fd,10,SEEK_SET);
+sleep(50);
+}
+close(fd);
+return 0;
+}
+#include "ch02.h"
+int main()
+{
+int n,i,fd;
+char buf;
+fd=open("./test.dat",O_CREAT|O_TRUNC|O_WRONLY,0644);
+for(i=0;i<2;i++)
+{
+srand(time(0));
+n=rand()%26;
+buf=(char)('A'+n);
+write(fd,&buf,1);
+lseek(fd,10,SEEK_SET);
+sleep(70);
+}
+close(fd);
+return 0;
+}
+yd@ubuntu:~/week4$ ./4-7.c
+bash: ./4-7.c: 权限不够
+yd@ubuntu:~/week4$ chomod 777 4-7.c
+未找到 'chomod' 命令，您要输入的是否是：
+命令 'chmod' 来自于包 'coreutils' (main)
+chomod：未找到命令
+yd@ubuntu:~/week4$ chmod 777 4-7.c
+yd@ubuntu:~/week4$ ./4-7.c
+./4-7.c: 行 2: 未预期的符号 `(' 附近有语法错误
+./4-7.c: 行 2: `int main()'
+yd@ubuntu:~/week4$ ./4-7
+yd@ubuntu:~/week4$ 
+yd@ubuntu:~/week4$ ./4-7.c
+bash: ./4-7.c: 权限不够
+yd@ubuntu:~/week4$ chomod 777 4-7.c
+未找到 'chomod' 命令，您要输入的是否是：
+命令 'chmod' 来自于包 'coreutils' (main)
+chomod：未找到命令
+yd@ubuntu:~/week4$ chmod 777 4-7.c
+yd@ubuntu:~/week4$ ./4-7.c
+./4-7.c: 行 2: 未预期的符号 `(' 附近有语法错误
+./4-7.c: 行 2: `int main()'
+yd@ubuntu:~/week4$ ./4-7
+yd@ubuntu:~/week4$ ^C
+yd@ubuntu:~/week4$ vi 4-7.c
+yd@ubuntu:~/week4$ vi 4-8.c
+yd@ubuntu:~/week4$ gcc 4-8.c -o 4-8
+yd@ubuntu:~/week4$ gcc 4-7.c -o 4-7
+yd@ubuntu:~/week4$ ./4-7
+write1:a
+write1:f
+yd@ubuntu:~/week4$ stat test.dat
+文件：'test.dat'
+大小：11 块：8 IO 块：4096 普通文件
+设备：801h/2049d Inode：529548 硬链接：1
+权限：(0644/-rw-r--r--) Uid：( 1000/ yd) Gid：( 1000/ yd)
+最近访问：2020-10-19 16:50:46.828123111 +0800
+最近更改：2020-10-19 16:50:46.435957105 +0800
+最近改动：2020-10-19 16:50:46.435957105 +0800
+创建时间：-
+yd@ubuntu:~/week4$ vi 4-9.c
+yd@ubuntu:~/week4$ gcc 4-9.c -o 4-9
+4-9.c:1:18: fatal error: ch02.h: 没有那个文件或目录
+compilation terminated.
+yd@ubuntu:~/week4$ vi 4-9.c
+yd@ubuntu:~/week4$ gcc 4-9.c -o 4-9
+4-9.c: In function ‘main’:
+4-9.c:6:25: error: ‘w’ undeclared (first use in this function)
+fp=fopen("./ch02.h",w);
+^
+4-9.c:6:25: note: each undeclared identifier is reported only once for each function it appears in
+yd@ubuntu:~/week4$ vi 4-9.c
+yd@ubuntu:~/week4$ gcc 4-9.c -o 4-9
+yd@ubuntu:~/week4$ ./4-9
+fd = 3yd@ubuntu:~/week4$ 
+yd@ubuntu:~/week4$ cat 4-7.c 4-8.c 4-9.c
+#include "ch02.h"
+int main()
+{
+int n,i,fd;
+char buf;
+fd=open("./test.dat",O_CREAT|O_TRUNC|O_WRONLY,0644);
+for(i=0;i<2;i++)
+{
+srand(time(0));
+n=rand()%26;
+buf=(char)('a'+n);
+printf("write1:%c\n",buf);
+write(fd,&buf,1);
+lseek(fd,10,SEEK_SET);
+sleep(40);
+}
+close(fd);
+return 0;
+}
+#include "ch02.h"
+int main()
+{
+int n,i,fd;
+char buf;
+fd=open("./test.dat",O_CREAT|O_TRUNC|O_WRONLY,0644);
+for(i=0;i<2;i++)
+{
+srand(time(0));
+n=rand()%26;
+buf=(char)('A'+n);
+printf("write2:%c\n",buf);
+write(fd,&buf,1);
+lseek(fd,10,SEEK_SET);
+sleep(50);
+}
+close(fd);
+return 0;
+}
+#include "ch02.h"
+int main()
+{
+FILE *fp;
+int fd;
+fp=fopen("./ch02.h","r");
+fd=fileno(fp);
+printf("fd = %d",fd);
+return 0;
+}
+yd@ubuntu:~/week4$ 
+yd@ubuntu:~$ cd week4
+yd@ubuntu:~/week4$ od -c test.dat
+0000000 Y \0 \0 \0 \0 \0 \0 \0 \0 \0 f
+0000013
+yd@ubuntu:~/week4$ 
+yd@ubuntu:~/week4$ od -c test.dat
+0000000 Y \0 \0 \0 \0 \0 \0 \0 \0 \0 Z
+0000013
+yd@ubuntu:~/week4$ od -c test.dat
+0000000 Y \0 \0 \0 \0 \0 \0 \0 \0 \0 Z
+0000013
+yd@ubuntu:~/week4$ od -c test.dat
+0000000 Y \0 \0 \0 \0 \0 \0 \0 \0 \0 Z
+0000013
+yd@ubuntu:~/week4$ od -c test.dat
+0000000 Y \0 \0 \0 \0 \0 \0 \0 \0 \0 Z
+0000013
+yd@ubuntu:~/week4$ od -c test.dat
+0000000 Y \0 \0 \0 \0 \0 \0 \0 \0 \0 Z
+0000013
+yd@ubuntu:~/week4$ od -c test.dat
+0000000 Y \0 \0 \0 \0 \0 \0 \0 \0 \0 Z
+0000013
+yd@ubuntu:~/week4$ od -c test.dat
+0000000 Y \0 \0 \0 \0 \0 \0 \0 \0 \0 Z
+0000013
+yd@ubuntu:~/week4$ od -c test.dat
+0000000 Y \0 \0 \0 \0 \0 \0 \0 \0 \0 Z
+0000013
+yd@ubuntu:~/week4$ od -c test.dat
+0000000 Y \0 \0 \0 \0 \0 \0 \0 \0 \0 Z
+0000013
+yd@ubuntu:~/week4$ od -c test.dat
+0000000 Y \0 \0 \0 \0 \0 \0 \0 \0 \0 Z
+0000013
+yd@ubuntu:~/week4$ 
+yd@ubuntu:~/week4$ od -c test.dat
+0000000 Y \0 \0 \0 \0 \0 \0 \0 \0 \0 Z
+0000013
+yd@ubuntu:~/week4$ cd week4
+bash: cd: week4: 没有那个文件或目录
+yd@ubuntu:~/week4$ cd week4
+bash: cd: week4: 没有那个文件或目录
+yd@ubuntu:~/week4$ 
+yd@ubuntu:~/week4$ cd week4
+bash: cd: week4: 没有那个文件或目录
+yd@ubuntu:~/week4$ od -c test.dat
+0000000 Y \0 \0 \0 \0 \0 \0 \0 \0 \0 Z
+0000013
+yd@ubuntu:~/week4$ 
+yd@ubuntu:~/week4$ od -c test.dat
+0000000 Y \0 \0 \0 \0 \0 \0 \0 \0 \0 Z
+0000013
+yd@ubuntu:~/week4$ od -c test.dat
+0000000 Y \0 \0 \0 \0 \0 \0 \0 \0 \0 Z
+0000013
+yd@ubuntu:~/week4$ od -c test.dat
+0000000 Y \0 \0 \0 \0 \0 \0 \0 \0 \0 Z
+0000013
+yd@ubuntu:~/week4$ od -c test.dat
+0000000 Y \0 \0 \0 \0 \0 \0 \0 \0 \0 Z
+0000013
+yd@ubuntu:~/week4$ od -c test.dat
+0000000 Y \0 \0 \0 \0 \0 \0 \0 \0 \0 Z
+0000013
+yd@ubuntu:~/week4$ od -c test.dat
+0000000 Y \0 \0 \0 \0 \0 \0 \0 \0 \0 Z
+0000013
+yd@ubuntu:~/week4$ od -c test.dat
+0000000 Y \0 \0 \0 \0 \0 \0 \0 \0 \0 Z
+0000013
+yd@ubuntu:~/week4$ od -c test.dat
+0000000 Y \0 \0 \0 \0 \0 \0 \0 \0 \0 Z
+0000013
+yd@ubuntu:~/week4$ od -c test.dat
+0000000 Y \0 \0 \0 \0 \0 \0 \0 \0 \0 Z
+0000013
+yd@ubuntu:~/week4$ od -c test.dat
+0000000 Y \0 \0 \0 \0 \0 \0 \0 \0 \0 Z
+0000013
+yd@ubuntu:~/week4$ od -c test.dat
+0000000 Y \0 \0 \0 \0 \0 \0 \0 \0 \0 Z
+0000013
+yd@ubuntu:~/week4$ od -c test.dat
+0000000 Y \0 \0 \0 \0 \0 \0 \0 \0 \0 Z
+0000013
+yd@ubuntu:~/week4$ od -c test.dat
+0000000 Y \0 \0 \0 \0 \0 \0 \0 \0 \0 Z
+0000013
+yd@ubuntu:~/week4$ 

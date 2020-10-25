@@ -1,0 +1,47 @@
+yd@ubuntu:~$ cd
+yd@ubuntu:~$ ls
+1-2 Desktop dump.rdb Pictures Templates
+1-2.c Documents examples.desktop practice Videos
+dbs Downloads Music Public workspace
+yd@ubuntu:~$ vi 1-2.c
+yd@ubuntu:~$ ./1-2.c
+bash: ./1-2.c: 权限不够
+yd@ubuntu:~$ gcc 1-2.c -0 1-2
+gcc: error: unrecognized command line option ‘-0’
+yd@ubuntu:~$ gcc 1-2.c -o 1-2
+1-2.c:4:22: fatal error: sys/type.h: 没有那个文件或目录
+compilation terminated.
+yd@ubuntu:~$ vi 1-2.c
+yd@ubuntu:~$ gcc 1-2.c -o 1-2
+yd@ubuntu:~$ ./1-2
+Hello shabi!
+yd@ubuntu:~$ cat 1-2.c
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <sys/types.h>
+#include <fcntl.h>
+#include <sys/stat.h>
+int main()
+{
+int ret;
+ret=write(1,"Hello world!\n",13);
+exit(0);
+}
+yd@ubuntu:~$ time 1-2
+1-2：未找到命令
+
+real 0m0.679s
+user 0m0.064s
+sys 0m0.120s
+yd@ubuntu:~$ echo $PATH
+/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/home/yd/Downloads/node-v6.1.0-linux-x64/bin
+yd@ubuntu:~$ ./1-2
+Hello shabi!
+yd@ubuntu:~$ vim 1-2.c
+yd@ubuntu:~$ vi 1-2.c
+yd@ubuntu:~$ vi 1-2.c
+yd@ubuntu:~$ gcc 1-2.c -o 1-2
+yd@ubuntu:~$ ./1-2
+2-2 is running!
+Hello world!

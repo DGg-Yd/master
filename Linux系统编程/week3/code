@@ -1,0 +1,316 @@
+yd@ubuntu:~$ pwd
+/home/yd
+yd@ubuntu:~$ mkdir week3
+yd@ubuntu:~$ cd week3
+yd@ubuntu:~/week3$ vi 3-2-1.c
+yd@ubuntu:~/week3$ gcc -g -Wall 3-2-1.c -0 3-2-2
+gcc: error: 3-2-2: 没有那个文件或目录
+gcc: error: unrecognized command line option ‘-0’
+yd@ubuntu:~/week3$ gcc -g -Wall 3-2-1.c -0 3-2-2
+gcc: error: 3-2-2: 没有那个文件或目录
+gcc: error: unrecognized command line option ‘-0’
+yd@ubuntu:~/week3$ gcc -g -Wall 3-2-1.c -o 3-2-2
+3-2-1.c: In function ‘main’:
+3-2-1.c:10:29: error: invalid suffix "_CREAT" on integer constant
+fd = open("./test1.txt",0_CREAT,0644);
+^
+yd@ubuntu:~/week3$ vi test1.txt
+yd@ubuntu:~/week3$ gcc -g -Wall 3-2-1.c -o 3-2-2
+3-2-1.c: In function ‘main’:
+3-2-1.c:10:29: error: invalid suffix "_CREAT" on integer constant
+fd = open("./test1.txt",0_CREAT,0644);
+^
+yd@ubuntu:~/week3$ vi 3-2-1.c
+yd@ubuntu:~/week3$ gcc -g -Wall 3-2-1.c -o 3-2-2
+yd@ubuntu:~/week3$ ./3-2-2
+file fd - 3
+yd@ubuntu:~/week3$ vi 3-2-1.c
+yd@ubuntu:~/week3$ gcc -g -Wall 3-2-1.c -o 3-2-2
+yd@ubuntu:~/week3$ ./3-2-2
+file fd = 3
+yd@ubuntu:~/week3$ cp 3-2-1.c 3-2-2.c
+yd@ubuntu:~/week3$ vi 3-2-2.c
+yd@ubuntu:~/week3$ gcc -g -Wall 3-2-2.c -o 3-2-3
+3-2-2.c: In function ‘main’:
+3-2-2.c:10:5: error: ‘fd’ undeclared (first use in this function)
+fd = fopen("./test1.txt","w");
+^
+3-2-2.c:10:5: note: each undeclared identifier is reported only once for each function it appears in
+3-2-2.c:12:11: warning: passing argument 1 of ‘close’ makes integer from pointer without a cast [-Wint-conversion]
+close(fp);
+^
+In file included from 3-2-2.c:4:0:
+/usr/include/unistd.h:356:12: note: expected ‘int’ but argument is of type ‘FILE * {aka struct _IO_FILE *}’
+extern int close (int __fd);
+^
+yd@ubuntu:~/week3$ ./3-2-3
+bash: ./3-2-3: 没有那个文件或目录
+yd@ubuntu:~/week3$ vi 3-2-2.c
+yd@ubuntu:~/week3$ gcc -g -Wall 3-2-2.c -o 3-2-3
+3-2-2.c: In function ‘main’:
+3-2-2.c:10:5: error: ‘fd’ undeclared (first use in this function)
+fd = fopen("./test1.txt","w");
+^
+3-2-2.c:10:5: note: each undeclared identifier is reported only once for each function it appears in
+yd@ubuntu:~/week3$ vi 3-2-2.c
+yd@ubuntu:~/week3$ gcc -g -Wall 3-2-2.c -o 3-2-3
+yd@ubuntu:~/week3$ ./3-2-3
+file fd = 3
+yd@ubuntu:~/week3$ 
+yd@ubuntu:~/week3$ cat 3-2-1.c 3-2-2.c
+#include <stdio.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <unistd.h>
+#include <string.h>
+#include <fcntl.h>
+int main()
+{
+int fd;
+fd = open("./test1.txt",O_CREAT,0644);
+printf("file fd = %d\n",fd);
+close(fd);
+return 0;
+}
+#include <stdio.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <unistd.h>
+#include <string.h>
+#include <fcntl.h>
+int main()
+{
+FILE *fp;
+fp = fopen("./test1.txt","w");
+printf("file fd = %d\n",fp->_fileno);
+fclose(fp);
+return 0;
+}
+yd@ubuntu:~/week3$ 
+yd@ubuntu:~/week3$ cp 3-2-2.c ch02.h
+yd@ubuntu:~/week3$ vi ch02.h
+yd@ubuntu:~/week3$ pwd
+/home/yd/week3
+yd@ubuntu:~/week3$ ls
+3-2-1.c 3-2-2 3-2-2.c 3-2-3 ch02.h test1.txt
+yd@ubuntu:~/week3$ vi 3-2-3.c
+yd@ubuntu:~/week3$ gcc -g -Wall 3-2-3.c -o 3-2-1
+3-2-3.c: In function ‘main’:
+3-2-3.c:9:5: error: ‘ret’ undeclared (first use in this function)
+ret = fgets(buf,sizeof(buf),stdin);
+^
+3-2-3.c:9:5: note: each undeclared identifier is reported only once for each function it appears in
+yd@ubuntu:~/week3$ vi 3-2-3.c
+yd@ubuntu:~/week3$ gcc -g -Wall 3-2-3.c -o 3-2-1
+yd@ubuntu:~/week3$ ./3-2-1
+i2123 asdasdas asdasdasdasdzxczxc
+Content is i2123 asdasdas asdasdasdasdzxczxc
+
+yd@ubuntu:~/week3$ vi 3-2-3.c
+yd@ubuntu:~/week3$ gcc -g -Wall 3-2-3.c -o 3-2-1
+yd@ubuntu:~/week3$ ./3-2-1
+1as2d132asd32as14d5
+Content is 1as2d132asd32as14d5
+
+yd@ubuntu:~/week3$ vi 3-2-3.c
+yd@ubuntu:~/week3$ vi test1.txt
+yd@ubuntu:~/week3$ vi 3-2-3.c
+yd@ubuntu:~/week3$ ./3-2-1
+asddsadsadsaadsdas asfkhsafkjh123adsf32s1adfsadfsaf
+Content is asddsadsadsaadsdas asfkhsafkjh123adsf32s1adfsadfsaf
+
+yd@ubuntu:~/week3$ vi test1.txt
+yd@ubuntu:~/week3$ cat 3-2-3.c test1.txt
+#include "ch02.h"
+int main()
+{
+FILE *fp;
+char buf[80];
+memset(buf,0,sizeof(buf));
+if((fp = fopen("./test1.txt","w"))==NULL)
+perror("open failed!\n");
+fgets(buf,sizeof(buf),stdin);
+printf("Content is %s\n",buf);
+fwrite(buf,sizeof(buf),1,fp);
+fclose(fp);
+return 0;
+}
+asddsadsadsaadsdas asfkhsafkjh123adsf32s1adfsadfsaf
+
+yd@ubuntu:~/week3$ 
+yd@ubuntu:~/week3$ cp 3-2-3.c 3-2-4.c
+yd@ubuntu:~/week3$ vi 3-2-4.c
+yd@ubuntu:~/week3$ gcc -g -Wall 3-2-4.c -o 3-2-4
+3-2-4.c: In function ‘main’:
+3-2-4.c:7:11: warning: passing argument 1 of ‘fgets’ from incompatible pointer type [-Wincompatible-pointer-types]
+fgets(argv,argc,stdin);
+^
+In file included from ch02.h:1:0,
+from 3-2-4.c:1:
+/usr/include/stdio.h:622:14: note: expected ‘char * restrict’ but argument is of type ‘char **’
+extern char *fgets (char *__restrict __s, int __n, FILE *__restrict __stream)
+^
+3-2-4.c:8:12: warning: format ‘%s’ expects argument of type ‘char *’, but argument 2 has type ‘char **’ [-Wformat=]
+printf("Content is %s\n",argv);
+^
+yd@ubuntu:~/week3$ ./3-2-4
+Content is 
+yd@ubuntu:~/week3$ ./3-2-4 12 a b c
+
+Content is 
+
+yd@ubuntu:~/week3$ vi 3-2-4.c
+yd@ubuntu:~/week3$ gcc -g -Wall 3-2-4.c -o 3-2-4
+3-2-4.c: In function ‘main’:
+3-2-4.c:7:11: warning: passing argument 1 of ‘fgets’ from incompatible pointer type [-Wincompatible-pointer-types]
+fgets(argv,argc,stdin);
+^
+In file included from ch02.h:1:0,
+from 3-2-4.c:1:
+/usr/include/stdio.h:622:14: note: expected ‘char * restrict’ but argument is of type ‘char **’
+extern char *fgets (char *__restrict __s, int __n, FILE *__restrict __stream)
+^
+3-2-4.c:8:12: warning: format ‘%s’ expects argument of type ‘char *’, but argument 2 has type ‘char **’ [-Wformat=]
+printf("Content is %s\n",argv);
+^
+yd@ubuntu:~/week3$ vi 3-2-4.c
+yd@ubuntu:~/week3$ gcc -g -Wall 3-2-4.c -o 3-2-4
+3-2-4.c: In function ‘main’:
+3-2-4.c:7:11: warning: cast from pointer to integer of different size [-Wpointer-to-int-cast]
+fgets((char)argv,argc,stdin);
+^
+3-2-4.c:7:11: warning: passing argument 1 of ‘fgets’ makes pointer from integer without a cast [-Wint-conversion]
+In file included from ch02.h:1:0,
+from 3-2-4.c:1:
+/usr/include/stdio.h:622:14: note: expected ‘char * restrict’ but argument is of type ‘char’
+extern char *fgets (char *__restrict __s, int __n, FILE *__restrict __stream)
+^
+3-2-4.c:8:12: warning: format ‘%s’ expects argument of type ‘char *’, but argument 2 has type ‘char **’ [-Wformat=]
+printf("Content is %s\n",argv);
+^
+3-2-4.c:9:12: warning: cast from pointer to integer of different size [-Wpointer-to-int-cast]
+fwrite((char)argv,argc,1,fp);
+^
+3-2-4.c:9:12: warning: passing argument 1 of ‘fwrite’ makes pointer from integer without a cast [-Wint-conversion]
+In file included from ch02.h:1:0,
+from 3-2-4.c:1:
+/usr/include/stdio.h:715:15: note: expected ‘const void * restrict’ but argument is of type ‘char’
+extern size_t fwrite (const void *__restrict __ptr, size_t __size,
+^
+yd@ubuntu:~/week3$ vi 3-2-4.c
+yd@ubuntu:~/week3$ gcc -g -Wall 3-2-4.c -o 3-2-4
+3-2-4.c: In function ‘main’:
+3-2-4.c:7:11: warning: passing argument 1 of ‘fgets’ from incompatible pointer type [-Wincompatible-pointer-types]
+fgets(argv,argc,stdin);
+^
+In file included from ch02.h:1:0,
+from 3-2-4.c:1:
+/usr/include/stdio.h:622:14: note: expected ‘char * restrict’ but argument is of type ‘char **’
+extern char *fgets (char *__restrict __s, int __n, FILE *__restrict __stream)
+^
+3-2-4.c:8:12: warning: format ‘%s’ expects argument of type ‘char *’, but argument 2 has type ‘char **’ [-Wformat=]
+printf("Content is %s\n",argv);
+^
+yd@ubuntu:~/week3$ ./3-2-4 12 a b c
+
+Content is 
+
+yd@ubuntu:~/week3$ vi 3-2-4.c
+yd@ubuntu:~/week3$ gcc -g -Wall 3-2-4.c -o 3-2-4
+3-2-4.c: In function ‘main’:
+3-2-4.c:7:11: warning: passing argument 1 of ‘fgets’ from incompatible pointer type [-Wincompatible-pointer-types]
+fgets(argv,argc,stdin);
+^
+In file included from ch02.h:1:0,
+from 3-2-4.c:1:
+/usr/include/stdio.h:622:14: note: expected ‘char * restrict’ but argument is of type ‘char **’
+extern char *fgets (char *__restrict __s, int __n, FILE *__restrict __stream)
+^
+3-2-4.c:8:12: warning: format ‘%s’ expects argument of type ‘char *’, but argument 2 has type ‘char **’ [-Wformat=]
+printf("Content is %s\n",argv);
+^
+yd@ubuntu:~/week3$ vi 3-2-4.c
+yd@ubuntu:~/week3$ gcc -g -Wall 3-2-4.c -o 3-2-4
+3-2-4.c: In function ‘main’:
+3-2-4.c:7:11: warning: passing argument 1 of ‘fgets’ from incompatible pointer type [-Wincompatible-pointer-types]
+fgets(argv,argc,stdin);
+^
+In file included from ch02.h:1:0,
+from 3-2-4.c:1:
+/usr/include/stdio.h:622:14: note: expected ‘char * restrict’ but argument is of type ‘char **’
+extern char *fgets (char *__restrict __s, int __n, FILE *__restrict __stream)
+^
+yd@ubuntu:~/week3$ vi 3-2-4.c
+yd@ubuntu:~/week3$ ./3-2-4 12 a b c
+asdsa
+yd@ubuntu:~/week3$ ./3-2-4 12 a b c
+
+yd@ubuntu:~/week3$ vi 3-2-4.c
+yd@ubuntu:~/week3$ vi 3-2-4.c
+yd@ubuntu:~/week3$ gcc -g -Wall 3-2-4.c -o 3-2-4
+3-2-4.c: In function ‘main’:
+3-2-4.c:7:12: warning: format ‘%s’ expects argument of type ‘char *’, but argument 2 has type ‘char **’ [-Wformat=]
+printf("Content is %s\n",argv);
+^
+yd@ubuntu:~/week3$ vi 3-2-4.c
+yd@ubuntu:~/week3$ gcc -g -Wall 3-2-4.c -o 3-2-4
+yd@ubuntu:~/week3$ ./3-2-4 12 a b c
+yd@ubuntu:~/week3$ test1.txt
+test1.txt：未找到命令
+yd@ubuntu:~/week3$ cat test1.txt
+A(��yd@ubuntu:~/week3$ vi test1.txt
+yd@ubuntu:~/week3$ vi 3-2-4.c
+yd@ubuntu:~/week3$ ./3-2-4 12 a b c
+yd@ubuntu:~/week3$ vi 3-2-4.c
+yd@ubuntu:~/week3$ gcc -g -Wall 3-2-4.c -o 3-2-4
+3-2-4.c: In function ‘main’:
+3-2-4.c:7:35: error: expected expression before ‘]’ token
+printf("Content is %s\n",argv[]);
+^
+yd@ubuntu:~/week3$ vi 3-2-4.c
+yd@ubuntu:~/week3$ gcc -g -Wall 3-2-4.c -o 3-2-4
+yd@ubuntu:~/week3$ ./3-2-4 12 a b c
+[1] : 12 2byte
+[2] : a 1byte
+[3] : b 1byte
+[4] : c 1byte
+yd@ubuntu:~/week3$ cp 3-2-4.c 3-2-5.c
+yd@ubuntu:~/week3$ vi 3-2-5.c
+yd@ubuntu:~/week3$ gcc -g -Wall 3-2-5.c -o 3-2-5
+^[[Ayd@ubuntu:~/wee./3-2-5 12 a b c-2-5
+[1] : 12 2byte
+[2] : a 1byte
+[3] : b 1byte
+[4] : c 1byte
+yd@ubuntu:~/week3$ cat 3-2-4.c 3-2-5.c
+#include "ch02.h"
+int main(int argc, char *argv[])
+{
+FILE *fp;
+if((fp = fopen("./test1.txt","w"))==NULL)
+perror("open failed!\n");
+int i;
+for(i=1;i<argc;i++)
+{
+fprintf(fp,"%s",argv[i]);
+printf("[%d] : \t %s \t%ldbyte\n",i,argv[i],strlen(argv[i]));
+}
+fclose(fp);
+return 0;
+}
+#include "ch02.h"
+int main(int argc, char *argv[])
+{
+FILE *fp;
+if((fp = fopen("./test1.txt","w"))==NULL)
+perror("open failed!\n");
+int i;
+for(i=1;i<argc;i++)
+{
+fwrite(argv[i],1,strlen(argv[i]),fp);
+printf("[%d] : \t %s \t%ldbyte\n",i,argv[i],strlen(argv[i]));
+}
+fclose(fp);
+return 0;
+}
+yd@ubuntu:~/week3$ 

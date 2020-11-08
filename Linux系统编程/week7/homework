@@ -1,6 +1,6 @@
 error2.c
   数组打印；
-python@ubuntu:~/week7/error$ cat error2.c
+yd@ubuntu:~/week7/error$ cat error2.c
 #include "../ch07.h"
 #define N 10
 int a[N],i;
@@ -13,14 +13,14 @@ int main()
     printf("%d\n",a[i]);
     return 0;
 }
-python@ubuntu:~/week7/error$ ./error2
+yd@ubuntu:~/week7/error$ ./error2
 i = 123456789
 段错误 (核心已转储)
 -------------------------------------------------------------------------------------------------------------------------------------------------------------
   
 原因：因为数组越界，所以a[10]=123456789 占了原本i所在的内存地址，因此打印出来的i为123456789，而a[123456789]不存在，发生数组越界，未给他分配地址空间，所以发生段错误。  
 程序检验：
-python@ubuntu:~/week7/error$ cat errorhaha.c
+yd@ubuntu:~/week7/error$ cat errorhaha.c
 #include "../ch07.h"
 #define N 10
 int a[N],i;
@@ -33,7 +33,7 @@ int main()
     printf("%d\n",a[10]);
     return 0;
 }
-python@ubuntu:~/week7/error$ ./errorhaha
+yd@ubuntu:~/week7/error$ ./errorhaha
 i = 123456789
 123456789
 
@@ -43,7 +43,7 @@ i = 123456789
   
 7-7.c
   环境变量2打印；
-python@ubuntu:~/week7$ cat 7-7.c 
+yd@ubuntu:~/week7$ cat 7-7.c 
 #include "ch07.h"
 static void set_env_string(void)
 {
@@ -74,7 +74,7 @@ putenv用于增加或修改当前的环境变量。string的格式为“名字=�
 如果非要用putenv来设置环境变量， 就必须要保证参数是一个长期存在的内容。 因此，只能选择全局变量、常量或动态内存等。
 
 
-python@ubuntu:~/week7$ cat haha.c
+yd@ubuntu:~/week7$ cat haha.c
 #include "ch07.h"
 char test_env[]="test_env=test";
 static void set_env_string(void)
